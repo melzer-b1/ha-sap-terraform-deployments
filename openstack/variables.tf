@@ -1,3 +1,8 @@
+variable "project" {
+  description = "OpenStack tenant/project name in openstack"
+  type        = string
+}
+
 variable "region" {
   description = "OpenStack Availability Zone region where the deployment machines will be created"
   type        = string
@@ -518,6 +523,7 @@ variable "hana_majority_maker_ip" {
 }
 
 # Monitoring related variables
+
 variable "monitoring_name" {
   description = "hostname, without the domain part"
   type        = string
