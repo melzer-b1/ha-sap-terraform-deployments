@@ -944,12 +944,12 @@ variable "netweaver_ha_enabled" {
 variable "netweaver_shared_storage_type" {
   description = "shared Storage type to use for Netweaver deployment - not supported yet for this cloud provider yet"
   type        = string
-  default     = ""
+  default     = "drbd"
   validation {
     condition = (
-      can(regex("^(|)$", var.netweaver_shared_storage_type))
+      can(regex("^(drbd|filestore)$", var.netweaver_shared_storage_type))
     )
-    error_message = "Invalid Netweaver shared storage type. Options: none."
+    error_message = "Invalid Netweaver shared storage type. Options: drbd|filestore."
   }
 }
 
@@ -975,6 +975,15 @@ variable "hwcct" {
 
 variable "pre_deployment" {
   description = "Enable pre deployment local execution. Only available for clients running Linux"
+  type        = bool
+  default     = false
+}
+
+#
+# Post deployment
+#
+variable "cleanup_secrets" {
+  description = "Enable salt states that cleanup secrets, e.g. delete /etc/salt/grains"
   type        = bool
   default     = false
 }
